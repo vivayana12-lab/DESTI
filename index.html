@@ -699,8 +699,9 @@
         d.style.display = isOpen ? 'none' : 'block';
         nextDiv.classList.toggle('active', !isOpen);
     };
-    list.appendChild(nextDiv);
-            // Створюємо блок відгуку з інтерактивною шкалою
+   list.appendChild(nextDiv);
+
+// Створюємо блок відгуку з інтерактивною шкалою та новими запитаннями
 const feedbackDiv = document.createElement('div');
 feedbackDiv.innerHTML = `
     <div id="feedback-section" class="res-card" style="border: 1px solid var(--accent); margin-top: 30px; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px;">
@@ -712,31 +713,51 @@ feedbackDiv.innerHTML = `
                 <label style="display: block; margin-bottom: 15px; font-size: 16px; color: #eee; font-weight: 600;">
                     1. Чи погоджуєтесь ви із отриманим на сайті результатом?
                 </label>
-               <div style="display: flex; justify-content: center; gap: 20px;">
-    <label style="flex: 1; max-width: 100px;">
-        <input type="radio" name="agreement" value="Так" required style="display:none;" id="yes">
-        <div onclick="document.getElementById('yes').click()" style="padding: 10px; border: 1px solid #555; border-radius: 5px; cursor: pointer; transition: 0.3s; color: #ccc;" class="choice-btn">Так</div>
-    </label>
-    <label style="flex: 1; max-width: 100px;">
-        <input type="radio" name="agreement" value="Ні" style="display:none;" id="no">
-        <div onclick="document.getElementById('no').click()" style="padding: 10px; border: 1px solid #555; border-radius: 5px; cursor: pointer; transition: 0.3s; color: #ccc;" class="choice-btn">Ні</div>
-    </label>
-</div>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <label style="flex: 1; max-width: 100px;">
+                        <input type="radio" name="agreement" value="Так" required style="display:none;" id="yes">
+                        <div onclick="document.getElementById('yes').click()" style="padding: 10px; border: 1px solid #555; border-radius: 5px; cursor: pointer; transition: 0.3s; color: #ccc;" class="choice-btn">Так</div>
+                    </label>
+                    <label style="flex: 1; max-width: 100px;">
+                        <input type="radio" name="agreement" value="Ні" style="display:none;" id="no">
+                        <div onclick="document.getElementById('no').click()" style="padding: 10px; border: 1px solid #555; border-radius: 5px; cursor: pointer; transition: 0.3s; color: #ccc;" class="choice-btn">Ні</div>
+                    </label>
+                </div>
             </div>
 
             <div style="text-align: center;">
                 <label style="display: block; margin-bottom: 10px; font-size: 16px; color: #eee; font-weight: 600;">
                     2. За 5-бальною шкалою, як ви б оцінили сайт?
                 </label>
-                <input type="range" name="rating" min="1" max="5" step="0.5" value="4.5" 
+                <input type="range" name="rating_site" min="1" max="5" step="0.5" value="4.5" 
                        style="width: 100%; cursor: pointer; accent-color: var(--accent);" 
                        oninput="this.nextElementSibling.innerText = this.value">
                 <div style="font-size: 24px; color: var(--accent); font-weight: 800; margin-top: 10px;">4.5</div>
             </div>
 
+            <div style="text-align: center;">
+                <label style="display: block; margin-bottom: 10px; font-size: 16px; color: #eee; font-weight: 600; line-height: 1.4;">
+                    3. Як б ви оцінили сфери, які ви отримали в результаті, по складності до проходження тесту? (від 1 до 5)
+                </label>
+                <input type="range" name="difficulty_before" min="1" max="5" step="1" value="3" 
+                       style="width: 100%; cursor: pointer; accent-color: var(--accent);" 
+                       oninput="this.nextElementSibling.innerText = this.value">
+                <div style="font-size: 24px; color: var(--accent); font-weight: 800; margin-top: 10px;">3</div>
+            </div>
+
+            <div style="text-align: center;">
+                <label style="display: block; margin-bottom: 10px; font-size: 16px; color: #eee; font-weight: 600; line-height: 1.4;">
+                    4. І як оцінюєте після, коли ознайомилися із можливими складнощами, висвітленими в тесті? (від 1 до 5)
+                </label>
+                <input type="range" name="difficulty_after" min="1" max="5" step="1" value="3" 
+                       style="width: 100%; cursor: pointer; accent-color: var(--accent);" 
+                       oninput="this.nextElementSibling.innerText = this.value">
+                <div style="font-size: 24px; color: var(--accent); font-weight: 800; margin-top: 10px;">3</div>
+            </div>
+
             <div>
                 <label style="display: block; margin-bottom: 10px; font-size: 16px; color: #eee; font-weight: 600;">
-                    3. Якщо маєте додаткові відгуки чи зауваження, пропишіть їх нижче:
+                    5. Якщо маєте додаткові відгуки чи зауваження, пропишіть їх нижче:
                 </label>
                 <textarea name="comments" placeholder="Твій відгук..." rows="4" 
                           style="width: 100%; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 12px; border-radius: 8px; font-family: 'Montserrat', sans-serif; resize: none; box-sizing: border-box; outline: none;"></textarea>
@@ -753,7 +774,7 @@ feedbackDiv.innerHTML = `
     /* 1. Стан при наведенні (Hover) */
     .choice-btn:hover {
         border-color: var(--accent) !important;
-        background: rgba(255, 0, 255, 0.1); /* Легкий підсвіт */
+        background: rgba(255, 0, 255, 0.1); 
         color: white !important;
     }
 
